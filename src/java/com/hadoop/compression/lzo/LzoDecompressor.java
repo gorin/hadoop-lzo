@@ -319,7 +319,14 @@ class LzoDecompressor implements Decompressor {
     return numBytes;
   }
 
-  public synchronized void reset() {
+
+    @Override
+    public int getRemaining() {
+        // Never use this function in BlockDecompressorStream.
+        return 0;
+    }
+
+    public synchronized void reset() {
     finished = false;
     compressedDirectBufLen = 0;
     uncompressedDirectBuf.limit(directBufferSize);

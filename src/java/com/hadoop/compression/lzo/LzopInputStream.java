@@ -273,7 +273,7 @@ public class LzopInputStream extends BlockDecompressorStream {
    * Read checksums and feed compressed block data into decompressor.
    */
   @Override
-  protected void getCompressedData() throws IOException {
+  protected int getCompressedData() throws IOException {
     checkStream();
     verifyChecksums();
 
@@ -317,10 +317,8 @@ public class LzopInputStream extends BlockDecompressorStream {
 
     // Send the read data to the decompressor.
     ldecompressor.setInput(buffer, 0, compressedLen);
-  }
 
-  public long getCompressedBytesRead() {
-    return noCompressedBytes;
+    return compressedLen;
   }
 
   @Override
